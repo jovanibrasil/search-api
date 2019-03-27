@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<config>
+    <luceneMatchVersion>5.0.0</luceneMatchVersion>
+
+    <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-dataimporthandler-.*\.jar" />
+    <lib dir="${solr.install.dir:../../../..}/dist/" regex="mysql-connector-java-8.0.15.jar" />
+
+    <requestHandler name='standard' class='solr.StandardRequestHandler' default='true'/>
+	<requestHandler name='/update' class='solr.UpdateRequestHandler' />
+	
+    <requestHandler name="/select" class="solr.SearchHandler">
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+        </lst>
+    </requestHandler>
+
+    <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+        <!-- Declare de configuration file. The configuration file contains the connection settings and queries. -->
+        <lst name="defaults">
+            <str name="config">blog-data-config.xml</str>
+            <str name="df">text_en</str>
+            <str name="q.op">OR</str>
+        </lst>
+    </requestHandler>
+
+</config>
+
+

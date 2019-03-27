@@ -1,0 +1,12 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
+     url="${db.url}" user="${db.user_name}" password="${db.password}"/>
+    <document>
+        <entity name="posts" query="SELECT post_id, body, title, summary FROM posts" >
+            <field name="id" column="post_id"></field>
+            <field name="body" column="body"></field>
+            <field name="title" column="title"></field>
+            <field name="summary" column="summary"></field>
+        </entity>
+    </document>
+</dataConfig>
