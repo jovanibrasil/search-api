@@ -1,7 +1,9 @@
+package com.search.api;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
 import com.google.gson.Gson;
+import com.search.services.SearchService;
 
 public class Main {
 

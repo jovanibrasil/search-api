@@ -1,3 +1,4 @@
+package com.search.services;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+
+import com.search.models.SummaryDTO;
 
 
 public class SearchService {

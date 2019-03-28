@@ -1,3 +1,4 @@
+package com.search.models;
 
 
 import java.util.Date;
