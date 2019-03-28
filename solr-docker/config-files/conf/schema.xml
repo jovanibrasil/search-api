@@ -16,12 +16,15 @@
 		<fieldtype name='long' class='solr.TrieLongField'/>
 	</types>
 	<fields>
-		<field name='id' type='string' required='true' />
-		<field name='body' type='string' multiValued='true' indexed='true' stored='true'/>
-		<field name='title' type='string' multiValued='true' indexed='true' stored='true'/>
-		<field name='summary' type='string' multiValued='true' indexed='true' stored='true'/>
-		<!-- <copyField source='*' dest='fullText' />
-		<field name='fullText' type='text_ws'  multiValued='true' stored='true' indexed='true'/>  -->
+		<field name='id' type='long' required='true' />
+		<field name='body' type='string' indexed='true' stored='true'/>
+		<field name='title' type='string' indexed='true' stored='true'/>
+		<field name='summary' type='string' indexed='true' stored='true'/>
+		<field name='creationDate' type='string' indexed='true' stored='true'/>
+		<field name='userName' type='string' indexed='true' stored='true'/>
+		<field name='tags' type='string' multiValued='true' indexed='true' stored='true'/>
+		<copyField source='*' dest='all' />
+		<field name='all' type='string'  multiValued='true' stored='true' indexed='true'/>
 	</fields>
 	<uniqueKey>id</uniqueKey>
 </schema>

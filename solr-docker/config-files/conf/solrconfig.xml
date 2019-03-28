@@ -11,6 +11,7 @@
     <requestHandler name="/select" class="solr.SearchHandler">
         <lst name="defaults">
             <str name="echoParams">explicit</str>
+            <str name="df">all</str>
         </lst>
     </requestHandler>
 

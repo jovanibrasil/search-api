@@ -2,11 +2,16 @@
     <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
      url="${db.url}" user="${db.user_name}" password="${db.password}"/>
     <document>
-        <entity name="posts" query="SELECT post_id, body, title, summary FROM posts" >
+        <entity name="post" pk="id" query="SELECT post_id, body, title, summary, creation_date, user_name FROM posts" >
             <field name="id" column="post_id"></field>
             <field name="body" column="body"></field>
             <field name="title" column="title"></field>
             <field name="summary" column="summary"></field>
+            <field name="creationDate" column="creation_date"></field>
+            <field name="userName" column="user_name"></field>
+            <entity name="tags" query="SELECT tags FROM post_tags WHERE post_post_id='${post.post_id}'">
+            	<field name="tags" column="tags"/>
+        	</entity>
         </entity>
     </document>
 </dataConfig>
