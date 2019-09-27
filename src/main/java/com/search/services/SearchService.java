@@ -21,7 +21,7 @@ import com.search.models.SummaryDTO;
 
 public class SearchService {
 
-	private String URL_STRING = "http://localhost:8983/solr/blog";
+	private String URL_STRING = "http://solr-master:8983/solr/blog";
 	
 //	public Post indexDocument(Post post) {
 //

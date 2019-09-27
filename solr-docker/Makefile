@@ -15,3 +15,8 @@ bash:
 	docker container exec -i -t --user root solr-master bash
 logs:
 	docker logs solr-master
+
+compose-up:
+	docker-compose up -d
+compose-down:
+	docker-compose down -v

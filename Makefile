@@ -6,8 +6,14 @@ build: clean
 	mvn clean package
 	docker build -t search-api .
 run: clean
-	docker run -d -p 4567:4567 --name=search-api search-api
+	docker run -d -p 4567:4567 --name=search-api --network net search-api
 start: stop
 	docker start search-api
 bash:
 	docker container exec -i -t --user root search-api bash
+logs:
+	docker logs search-api
+compose-up:
+	docker-compose up -d
+compose-down:
+	docker-compose down -v

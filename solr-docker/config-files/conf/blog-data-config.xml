@@ -9,7 +9,7 @@
             <field name="summary" column="summary"></field>
             <field name="creationDate" column="creation_date"></field>
             <field name="userName" column="user_name"></field>
-            <entity name="tags" query="SELECT tags FROM post_tags WHERE post_post_id='${post.post_id}'">
+            <entity name="tags" query="SELECT tag FROM post_tags WHERE post_id='${post.post_id}'">
             	<field name="tags" column="tags"/>
         	</entity>
         </entity>
