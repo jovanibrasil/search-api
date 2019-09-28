@@ -1,11 +1,13 @@
 version: '3.4' 
+networks:
+    net:
 services:
   search-api: # Spark API
     image: search-api
     container_name: search-api 
     ports:
       - 4567:4567
-    network:
+    networks:
       - net
     depends_on: 
       - solr-master
@@ -14,5 +16,5 @@ services:
     container_name: solr-master
     ports:
       - 8983:8983
-    network:
-      - net
+    networks:
+      - net 

@@ -4,7 +4,6 @@ clean: stop
 	- docker rm solr-master
 build: clean
 	docker build --build-arg BLOG_MYSQL_URL --build-arg BLOG_MYSQL_USERNAME --build-arg BLOG_MYSQL_PASSWORD -t solr-master .
-
 run: clean 
 	docker run --name solr-master --network net -d -p 8983:8983 -t solr-master
 	# Import data

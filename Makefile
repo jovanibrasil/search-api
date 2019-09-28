@@ -5,6 +5,7 @@ clean: stop
 build: clean
 	mvn clean package
 	docker build -t search-api .
+	chmod -R ugo+rw target/
 run: clean
 	docker run -d -p 4567:4567 --name=search-api --network net search-api
 start: stop

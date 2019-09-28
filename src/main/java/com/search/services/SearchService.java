@@ -74,7 +74,7 @@ public class SearchService {
 			
 			SolrQuery query = new SolrQuery();
 			String queryString = "summary:" + queryTerm;
-			query.set("fl", "id,summary,title,creationDate,tags,userName");
+			query.set("fl", "id, summary, title, creationDate, tags, userName");
 			query.set("q", queryTerm);
 			
 			//query.addFilterQuery("cat:electronics","store:amazon.com");
@@ -102,12 +102,12 @@ public class SearchService {
 		try {
 			List<String> tags = new ArrayList<>();
 			solrDocument.getFieldValues("tags").forEach(v -> { tags.add(v.toString()); });;
-			
 			return new SummaryDTO((Long)solrDocument.get("id"),
 					solrDocument.get("title").toString(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(solrDocument.get("creationDate").toString()),
 					null, solrDocument.get("summary").toString(), solrDocument.get("userName").toString(), tags); 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -1,6 +1,5 @@
 package com.search.models;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +49,12 @@ public class SummaryDTO {
 	}
 	public String getUserName() {
 		return userName;
+	}
+
+	@Override
+	public String toString() {
+		return "SummaryDTO [id=" + id + ", title=" + title + ", creationDate=" + creationDate + ", lastUpdateDate="
+				+ lastUpdateDate + ", summary=" + summary + ", userName=" + userName + ", tags=" + tags + "]";
 	}
 	
 }
