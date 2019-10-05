@@ -14,7 +14,7 @@ RUN echo "SOLR_OPTS=\"\$SOLR_OPTS -Ddb.url=$DB_URL -Ddb.user_name=$USER_NAME -Dd
 
 USER solr
 RUN mkdir -p /opt/solr/temp
-COPY config-files /opt/solr/temp
-COPY mysql-connector/mysql-connector-java-8.0.15.jar /opt/solr/dist
+COPY ./config-files /opt/solr/temp
+COPY ./mysql-connector/mysql-connector-java-8.0.15.jar /opt/solr/dist
 # Create an core using pre-defined configurations
 ENTRYPOINT [ "bash", "-c", "precreate-core blog /opt/solr/temp; exec solr -f" ]

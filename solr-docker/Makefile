@@ -3,11 +3,13 @@ stop:
 clean: stop
 	- docker rm solr-master
 build: clean
-	docker build --build-arg BLOG_MYSQL_URL --build-arg BLOG_MYSQL_USERNAME --build-arg BLOG_MYSQL_PASSWORD -t solr-master .
+	docker build -t solr-master .
 run: clean 
-	docker run --name solr-master --network net -d -p 8983:8983 -t solr-master
-	# Import data
-	#curl http://localhost:8983/solr/blog/dataimport?command=full-import
+	docker run --name solr-master --network net -d -p 8983:8983 \ 
+		-e BLOG_MYSQL_URL={BLOG_MYSQL_URL} -e BLOG_MYSQL_USERNAME=${BLOG_MYSQL_USERNAME} \ 
+		-e BLOG_MYSQL_PASSWORD={BLOG_MYSQL_PASSWORD} -t solr-master
+import-data: 
+	curl http://localhost:8983/solr/blog/dataimport?command=full-import
 start:
 	docker start solr-master 
 bash:
