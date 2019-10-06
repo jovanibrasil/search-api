@@ -1,7 +1,7 @@
 <dataConfig>
-    <dataSource type="JdbcDataSource" driver="com.mysql.cj.jdbc.Driver"
+	<dataSource type="JdbcDataSource" driver="com.mysql.cj.jdbc.Driver"
      url="${db.url}" user="${db.user_name}" password="${db.password}"/>
-    <document>
+	<document>
         <entity name="post" pk="id" query="SELECT post_id, body, title, summary, creation_date, user_id FROM posts" >
             <field name="id" column="post_id"></field>
             <field name="body" column="body"></field>
