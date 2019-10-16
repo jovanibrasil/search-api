@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'aws-agent' }
+    agent { label 'digital-ocean-agent' }
   
   	environment {
 		 DBURL = vault path: 'secret/blog-api/prod', key: 'blog-cred.url', vaultUrl: 'http://vault-server:8200', credentialsId: 'vault-cred-id', engineVersion: "2"
