@@ -7,13 +7,13 @@ public class SummaryDTO {
 
 	private Long id;
 	private String title;
-	private Date creationDate;
-	private Date lastUpdateDate;
+	private String creationDate;
+	private String lastUpdateDate;
 	private String summary;
 	private String userName;
 	private List<String> tags;
 	
-	public SummaryDTO(Long id, String title, Date creationDate, Date lastUpdateDate, 
+	public SummaryDTO(Long id, String title, String creationDate, String lastUpdateDate, 
 			String summary, String userName, List<String> tags) {
 		super();
 		this.id = id;
@@ -32,11 +32,11 @@ public class SummaryDTO {
 		return title;
 	}
 	
-	public Date getCreationDate() {
+	public String getCreationDate() {
 		return creationDate;
 	}
 
-	public Date getLastUpdateDate() {
+	public String getLastUpdateDate() {
 		return lastUpdateDate;
 	}
 	

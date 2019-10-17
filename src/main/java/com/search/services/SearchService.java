@@ -1,8 +1,8 @@
 package com.search.services;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,16 +11,18 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.SolrInputDocument;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.search.models.SummaryDTO;
 
 
 public class SearchService {
 
+	private static final Logger log = LoggerFactory.getLogger(SearchService.class);
+	
 	private String URL_STRING = "http://solr-master:8983/solr/blog";
 	
 //	public Post indexDocument(Post post) {
@@ -67,50 +69,63 @@ public class SearchService {
 	}
 
 	public List<SummaryDTO> searchDocumentsByTerm(String queryTerm) {
+		log.info("Searching documents by term");
 		List<SummaryDTO> summaryList = new ArrayList<>();		
 		try {
 
 			SolrClient solr = new HttpSolrClient.Builder(URL_STRING).build();
 			
 			SolrQuery query = new SolrQuery();
-			String queryString = "summary:" + queryTerm;
 			query.set("fl", "id, summary, title, creationDate, tags, userName");
 			query.set("q", queryTerm);
-			
 			//query.addFilterQuery("cat:electronics","store:amazon.com");
 			//query.set("defType", "edismax");
-			
 			// Submit the query
 			QueryResponse response = solr.query(query);
-
 			// Retrieve the list of documents
 			SolrDocumentList list = response.getResults();
-			System.out.println(list.size() + " documents retrivied");
-			for (SolrDocument solrDocument : list) {
-				summaryList.add(convertSolrDocumentToSummary(solrDocument));
-			}
+			log.info("Documents retrivied: {}", list.size());
+			
+			list.forEach(solrDoc -> {
+				SummaryDTO summaryDTO = this.convertSolrDocumentToSummary(solrDoc);
+				if(summaryDTO != null) {
+					summaryList.add(summaryDTO);
+				}else {
+					log.info("Conversion error. "
+							+ "The summary was not added to the summaries list.");
+				}
+			});
+			
 		} catch (SolrServerException e) {
+			log.info("SolrServerException occured when talking to Solr. {}", e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.info("IOexception occured. {}", e.getMessage());
 		}
-		
 		return summaryList;
 	}
 
 	private SummaryDTO convertSolrDocumentToSummary(SolrDocument solrDocument) {
+		log.info("Converting solr document to SummaryDTO ...");
 		try {
 			List<String> tags = new ArrayList<>();
 			solrDocument.getFieldValues("tags").forEach(v -> { tags.add(v.toString()); });;
-			return new SummaryDTO((Long)solrDocument.get("id"),
-					solrDocument.get("title").toString(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(solrDocument.get("creationDate").toString()),
-					null, solrDocument.get("summary").toString(), solrDocument.get("userName").toString(), tags); 
+			
+			SummaryDTO summaryDTO = new SummaryDTO((Long)solrDocument.get("id"),
+					solrDocument.get("title").toString(), 
+					// creation date
+					solrDocument.get("creationDate").toString(),
+					// lastUpdateDate
+					null, 
+					solrDocument.get("summary").toString(), 
+					solrDocument.get("userName").toString(), 
+					tags);
+			log.info("SummaryDTO: {}", summaryDTO);
+			return summaryDTO;
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			log.info("Error. {}", e.getMessage());
+			return null;
 		}
-		return null;
 	}
-
 	
 }
