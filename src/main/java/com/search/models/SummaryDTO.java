@@ -11,10 +11,11 @@ public class SummaryDTO {
 	private String lastUpdateDate;
 	private String summary;
 	private String userName;
+	private String bannerUrl;
 	private List<String> tags;
 	
 	public SummaryDTO(Long id, String title, String creationDate, String lastUpdateDate, 
-			String summary, String userName, List<String> tags) {
+			String summary, String userName, String bannerUrl, List<String> tags) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -22,6 +23,7 @@ public class SummaryDTO {
 		this.lastUpdateDate = lastUpdateDate;
 		this.summary = summary;
 		this.userName = userName;
+		this.bannerUrl = bannerUrl;
 		this.tags = tags;
 	}
 	
@@ -49,6 +51,10 @@ public class SummaryDTO {
 	}
 	public String getUserName() {
 		return userName;
+	}
+
+	public String getBannerUrl() {
+		return bannerUrl;
 	}
 
 	@Override

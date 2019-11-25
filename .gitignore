@@ -41,3 +41,7 @@ target/**
 
 # vscode files
 .vscode/
+
+# intellij
+*.iml
+.idea/
