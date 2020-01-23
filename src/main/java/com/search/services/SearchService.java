@@ -23,8 +23,8 @@ public class SearchService {
 
 	private static final Logger log = LoggerFactory.getLogger(SearchService.class);
 	
+	//private String URL_STRING = "http://127.0.0.1:8983/solr/blog";
 	private String URL_STRING = "http://solr-master:8983/solr/blog";
-
 
 	public List<SummaryDTO> searchDocumentsByTerm(String queryTerm) {
 		log.info("Searching documents by term {}", queryTerm);
@@ -111,11 +111,13 @@ public class SearchService {
 		log.info("Converting solr document to SummaryDTO ...");
 		try {
 			List<String> tags = new ArrayList<>();
-			solrDocument.getFieldValues("tags").forEach(v -> { tags.add(v.toString()); });;
+			solrDocument.getFieldValues("tags").forEach(v -> { tags.add(v.toString()); });
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String date = format.format(solrDocument.get("creationDate"));
 			SummaryDTO summaryDTO = new SummaryDTO((Long)solrDocument.get("id"),
 					solrDocument.get("title").toString(), 
 					// creation date
-					solrDocument.get("creationDate").toString(),
+					date,
 					// lastUpdateDate
 					null, 
 					solrDocument.get("summary").toString(), 

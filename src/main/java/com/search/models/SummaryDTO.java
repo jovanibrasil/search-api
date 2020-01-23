@@ -1,6 +1,5 @@
 package com.search.models;
 
-import java.util.Date;
 import java.util.List;
 
 public class SummaryDTO {
@@ -14,7 +13,7 @@ public class SummaryDTO {
 	private String bannerUrl;
 	private List<String> tags;
 	
-	public SummaryDTO(Long id, String title, String creationDate, String lastUpdateDate, 
+	public SummaryDTO(Long id, String title, String creationDate, String lastUpdateDate,
 			String summary, String userName, String bannerUrl, List<String> tags) {
 		super();
 		this.id = id;

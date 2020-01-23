@@ -7,7 +7,7 @@
             <field name="body" column="body"></field>
             <field name="title" column="title"></field>
             <field name="summary" column="summary"></field>
-	    	<field name="creationDate" column="creation_date"></field>
+	    	<field name="creationDate" xpath="/RDF/item/date" column="creation_date" dateTimeFormat="yyyy-MM-dd HH:mm:sss" type="date"></field>
 	    	<field name="userName" column="user_name"></field>
             <field name="bannerUrl" column="banner_url"></field>
 	    	<entity name="tags" query="SELECT tag FROM post_tags WHERE post_id='${post.post_id}'">
