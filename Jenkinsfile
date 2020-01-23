@@ -42,7 +42,7 @@ pipeline {
         stage("Deploy") {
             steps {
             	// run search-api 
-              	sh 'make run'
+              	sh 'make build && make run'
                 // run solr
                 sh 'cd solr-docker && make run BLOG_MYSQL_URL=${DBURL} BLOG_MYSQL_USERNAME=${USERNAME} BLOG_MYSQL_PASSWORD=${PASSWORD}'
                 sh 'sleep 60'
