@@ -2,9 +2,9 @@ pipeline {
     agent { label 'digital-ocean-agent' }
   
   	environment {
-		 DBURL = vault path: 'secret/blog-api/prod', key: 'blog-cred.url', vaultUrl: 'http://vault-server:8200', credentialsId: 'vault-cred-id', engineVersion: "1"
-		 USERNAME = vault path: 'secret/blog-api/prod', key: 'blog-cred.username', vaultUrl: 'http://vault-server:8200', credentialsId: 'vault-cred-id', engineVersion: "1"
-		 PASSWORD = vault path: 'secret/blog-api/prod', key: 'blog-cred.password', vaultUrl: 'http://vault-server:8200', credentialsId: 'vault-cred-id', engineVersion: "1"
+		 DBURL = vault path: 'secret/blog-api/prod', key: 'blog-db-cred.url', vaultUrl: 'http://vault-server:8200', credentialsId: 'vault-cred-id', engineVersion: "1"
+		 USERNAME = vault path: 'secret/blog-api/prod', key: 'blog-db-cred.username', vaultUrl: 'http://vault-server:8200', credentialsId: 'vault-cred-id', engineVersion: "1"
+		 PASSWORD = vault path: 'secret/blog-api/prod', key: 'blog-db-cred.password', vaultUrl: 'http://vault-server:8200', credentialsId: 'vault-cred-id', engineVersion: "1"
 	}
   
     stages {
